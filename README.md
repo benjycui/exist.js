@@ -35,11 +35,11 @@ exist.call(company, 'employees[0].getName')();
 
 ### exist(obj, nestedProp)
 
-`(Object, String) -> boolean`
+> (Object, String) -> boolean
 
 To check whether a nested property exists in `Object` or not.
 
-```
+```js
 const company = {
   employees: [
     {
@@ -55,11 +55,11 @@ exist(company, 'employees[0].age') // => false
 
 ### exist.get(obj, nestedProp[, defaultValue])
 
-`(Object, String[, anything]) -> undefined | value`
+> (Object, String[, anything]) -> undefined | value
 
 To get a nested property. If this property does not exist, return `undefined` or `defaultValue`.
 
-```
+```js
 const company = {
   employees: [
     {
@@ -76,11 +76,11 @@ exist.get(company, 'employees[0].age', 18) // => 18
 
 ### exist.set(obj, nestedProp, value)
 
-`(Object, String, anything) -> boolean`
+> (Object, String, anything) -> boolean
 
 To set a value to nested property. If success, return `true`. Otherwise, `false`.
 
-```
+```js
 const company = {
   employees: [{}]
 };
@@ -92,11 +92,11 @@ exist.set(company, 'stockholders[0].name', 'Benjy') // => false, for `stockholde
 
 ### exist.call(obj, nestedMethod)
 
-`(Object, String) -> Function`
+> (Object, String) -> Function
 
 To get a nested method, or return NOOP(`function() {}`) if this property does not exist.
 
-```
+```js
 const company = {
   employees: [
     {
