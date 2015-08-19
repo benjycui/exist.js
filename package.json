@@ -1,0 +1,11 @@
+{
+  "name": "exist.js",
+  "version": "0.1.0",
+  "description": "To make it easier to access nested property",
+  "main": "index.js",
+  "scripts": {
+    "test": "mocha"
+  },
+  "author": "Benjy Cui <benjytrys@gmail.com>",
+  "license": "MIT"
+}
