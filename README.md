@@ -1,5 +1,7 @@
 # exist.js
 
+[![Build Status](https://travis-ci.org/benjycui/exist.js.svg?branch=master)](https://travis-ci.org/benjycui/exist.js)
+
 If you are tired of those:
 
 ```js
