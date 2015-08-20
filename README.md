@@ -30,6 +30,21 @@ exist.set(company, 'employees[0].name', 'Benjy');
 exist.call(company, 'employees[0].getName')();
 ```
 
+## Getting Started
+
+Install exist.js as an npm module and save it to your package.json file as a dependency:
+
+```bash
+npm install exist.js --save
+```
+
+Once installed, it can now be referenced and used easily:
+
+```js
+const exist = require('exist.js');
+exist({}, 'name') // => false
+```
+
 
 ## API
 
