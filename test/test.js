@@ -83,7 +83,7 @@ describe('exist#set', function() {
   });
 });
 
-describe('exist#call', function() {
+describe('exist#invoke', function() {
   it('should return method when it exists', function() {
     const company = {
       employees: [
@@ -95,9 +95,9 @@ describe('exist#call', function() {
       ]
     };
 
-    assert.strictEqual(exist.call(company.employees[0], 'getName')(), 'Benjy');
-    assert.strictEqual(exist.call(company.employees, '[0].getName')(), 'Benjy');
-    assert.strictEqual(exist.call(company, 'employees[0].getName')(), 'Benjy');
+    assert.strictEqual(exist.invoke(company.employees[0], 'getName')(), 'Benjy');
+    assert.strictEqual(exist.invoke(company.employees, '[0].getName')(), 'Benjy');
+    assert.strictEqual(exist.invoke(company, 'employees[0].getName')(), 'Benjy');
   });
 
   it('should return `NOOP` when method does not exist', function() {
@@ -106,9 +106,9 @@ describe('exist#call', function() {
     };
     const NOOP = function() {};
 
-    assert.strictEqual(exist.call(company.employees[0], 'getName').toString(), NOOP.toString());
-    assert.strictEqual(exist.call(company.employees, '[1].getName').toString(), NOOP.toString());
-    assert.strictEqual(exist.call(company, 'stockholders[0].getName').toString(), NOOP.toString());
+    assert.strictEqual(exist.invoke(company.employees[0], 'getName').toString(), NOOP.toString());
+    assert.strictEqual(exist.invoke(company.employees, '[1].getName').toString(), NOOP.toString());
+    assert.strictEqual(exist.invoke(company, 'stockholders[0].getName').toString(), NOOP.toString());
   });
 
   it('should return `NOOP` when property is not a function', function() {
@@ -119,8 +119,8 @@ describe('exist#call', function() {
     };
     const NOOP = function() {};
 
-    assert.strictEqual(exist.call(company.employees[0], 'getName').toString(), NOOP.toString());
-    assert.strictEqual(exist.call(company.employees, '[1].getName').toString(), NOOP.toString());
-    assert.strictEqual(exist.call(company, 'stockholders[0].getName').toString(), NOOP.toString());
+    assert.strictEqual(exist.invoke(company.employees[0], 'getName').toString(), NOOP.toString());
+    assert.strictEqual(exist.invoke(company.employees, '[1].getName').toString(), NOOP.toString());
+    assert.strictEqual(exist.invoke(company, 'stockholders[0].getName').toString(), NOOP.toString());
   });
 });

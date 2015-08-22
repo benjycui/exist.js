@@ -4,28 +4,11 @@ const isExist = function isExist(variable) {
   return (typeof variable !== 'undefined' && variable !== null);
 };
 
-const rxAccess = /[\[\]\.]+/;
-
 const exist = function exist(obj, nestedProp) {
-  if (!isExist(obj)) {
-    return false;
-  }
-
-  const props = nestedProp.split(rxAccess);
-  let prev = obj;
-  for (let prop of props) {
-    if (!prop) continue;
-
-    const curr = prev[prop];
-    if (!isExist(curr)) {
-      return false;
-    }
-    prev = curr;
-  }
-
-  return true;
+  return isExist(exist.get(obj, nestedProp));
 };
 
+const rxAccess = /[\[\]\.]+/;
 exist.get = function get(obj, props, defaultValue) {
   if (!isExist(obj)) {
     return defaultValue;
@@ -63,7 +46,7 @@ exist.set = function set(obj, nestedProp, value) {
 };
 
 const NOOP = function() {};
-exist.call = function call(obj, nestedMethod) {
+exist.invoke = function invoke(obj, nestedMethod) {
   const method = exist.get(obj, nestedMethod);
   if (typeof method === 'function') {
     return method;

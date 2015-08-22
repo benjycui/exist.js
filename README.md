@@ -107,7 +107,7 @@ exist.set(company, 'stockholders[0].name', 'Benjy') // => false, for `stockholde
 ```
 
 
-### exist.call(obj, nestedMethod)
+### exist.invoke(obj, nestedMethod)
 
 > (Object, String) -> Function
 
@@ -125,8 +125,8 @@ const company = {
   ]
 };
 
-exist.call(company, 'employees[0].sayHi')('Bob') // => 'Nice to meet you, Bob!'
-exist.call(company, 'employees[0].sayHello')('Bob') // => Nothing will happen
+exist.invoke(company, 'employees[0].sayHi')('Bob') // => 'Nice to meet you, Bob!'
+exist.invoke(company, 'employees[0].sayHello')('Bob') // => Nothing will happen
 ```
 
 ## License
