@@ -6,6 +6,15 @@
   "scripts": {
     "test": "mocha"
   },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/benjycui/exist.js.git"
+  },
   "author": "Benjy Cui <benjytrys@gmail.com>",
-  "license": "MIT"
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/benjycui/exist.js/issues"
+  },
+  "homepage": "https://github.com/benjycui/exist.js#readme",
+  "devDependencies": {}
 }
