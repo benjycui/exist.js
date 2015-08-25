@@ -29,7 +29,7 @@ const name = exist.get(company, 'employees[0].name');
 exist.set(company, 'employees[0].name', 'Benjy');
 
 // To call a method of nested `Object`
-exist.call(company, 'employees[0].getName')();
+exist.invoke(company, 'employees[0].getName')();
 ```
 
 ## Getting Started
