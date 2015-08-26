@@ -1,42 +1,40 @@
 'use strict';
 
 const isExist = function isExist(variable) {
-  return (typeof variable !== 'undefined' && variable !== null);
-};
-
-const exist = function exist(obj, nestedProp) {
-  return isExist(exist.get(obj, nestedProp));
+  return (variable !== undefined && variable !== null);
 };
 
 const rxAccess = /[\[\]\.]+/;
-exist.get = function get(obj, props, defaultValue) {
-  if (!isExist(obj)) {
-    return defaultValue;
-  }
+const baseGet = function baseGet(obj, nestedProp) {
+  if (!isExist(obj)) return;
 
-  if (!Array.isArray(props)) {
-    props = props.split(rxAccess);
-  }
+  const props = Array.isArray(nestedProp) ? nestedProp : nestedProp.split(rxAccess);
 
-  let prev = obj;
+  let curr = obj;
   for (let prop of props) {
-    if (!prop) continue;
+    if (prop.length === 0) continue;
 
-    const curr = prev[prop];
-    if (!isExist(curr)) {
-      return defaultValue;
-    }
-    prev = curr;
+    curr = curr[prop];
+    if (!isExist(curr)) return;
   }
 
-  return prev;
+  return curr;
+};
+
+const exist = function exist(obj, nestedProp) {
+  return isExist(baseGet(obj, nestedProp));
+};
+
+exist.get = function get(obj, nestedProp, defaultValue) {
+  const value = baseGet(obj, nestedProp);
+  return isExist(value) ? value : defaultValue;
 };
 
 exist.set = function set(obj, nestedProp, value) {
   const props = nestedProp.split(rxAccess);
   const ownee = props.pop();
 
-  const owner = exist.get(obj, props);
+  const owner = baseGet(obj, props);
   if (isExist(owner)) {
     owner[ownee] = value;
     return true;
@@ -47,7 +45,7 @@ exist.set = function set(obj, nestedProp, value) {
 
 const NOOP = function() {};
 exist.invoke = function invoke(obj, nestedMethod) {
-  const method = exist.get(obj, nestedMethod);
+  const method = baseGet(obj, nestedMethod);
   if (typeof method === 'function') {
     return method;
   }
