@@ -88,8 +88,9 @@ describe('exist#invoke', function() {
     const company = {
       employees: [
         {
+          name: 'Benjy',
           getName: function() {
-            return 'Benjy';
+            return this.name;
           }
         }
       ]

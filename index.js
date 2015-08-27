@@ -45,9 +45,15 @@ exist.set = function set(obj, nestedProp, value) {
 
 const NOOP = function() {};
 exist.invoke = function invoke(obj, nestedMethod) {
-  const method = baseGet(obj, nestedMethod);
-  if (typeof method === 'function') {
-    return method;
+  const props = nestedMethod.split(rxAccess);
+  const ownee = props.pop();
+
+  const owner = baseGet(obj, props);
+  if (isExist(owner)) {
+    const method = owner[ownee];
+    if (typeof method === 'function') {
+      return method.bind(owner);
+    }
   }
   return NOOP;
 };
