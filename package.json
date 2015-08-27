@@ -16,5 +16,11 @@
     "url": "https://github.com/benjycui/exist.js/issues"
   },
   "homepage": "https://github.com/benjycui/exist.js#readme",
-  "devDependencies": {}
+  "devDependencies": {
+    "benchmark": "^1.0.0",
+    "lazy.js": "^0.4.0",
+    "lodash": "*",
+    "race.js": "^0.1.4",
+    "string-table": "^0.1.5"
+  }
 }

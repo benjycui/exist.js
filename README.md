@@ -19,7 +19,7 @@ if (company.employees && company.employees[0] && (typeof company.employees[0].ge
 }
 ```
 
-You can try **exist.js**. Something inspired by the existential operator(`?.` & `?()`) of [CoffeeScript](http://coffeescript.org/), but not the same as it. With exist.js, you can access nested property easily:
+You can try **exist.js**. Something inspired by the existential operator(`?.` & `?()`) of [CoffeeScript](http://coffeescript.org/), but not the same as it. With **exist.js**, you can access nested property easily:
 
 ```js
 // To get `name`, but you do not know whether `employees` and `employees[0]` exist or not
@@ -31,6 +31,8 @@ exist.set(company, 'employees[0].name', 'Benjy');
 // To call a method of nested `Object`
 exist.invoke(company, 'employees[0].getName')();
 ```
+
+Maybe you already know [lodash](https://github.com/lodash/lodash)'s `has` and `get`, but **exist.js** is faster. You can run `npm install && node ./perf.js` to prove.
 
 ## Getting Started
 
