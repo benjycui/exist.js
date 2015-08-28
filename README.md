@@ -32,6 +32,8 @@ exist.set(company, 'employees[0].name', 'Benjy');
 exist.invoke(company, 'employees[0].getName')();
 ```
 
+## Performance
+
 Maybe you already know [lodash](https://github.com/lodash/lodash)'s `has` and `get`, but **exist.js** is faster. You can run `npm install && node ./perf.js` to prove.
 
 ## Getting Started
