@@ -1,6 +1,6 @@
 {
   "name": "exist.js",
-  "version": "0.1.3",
+  "version": "0.2.0",
   "description": "To make it easier to access nested property",
   "main": "index.js",
   "scripts": {
