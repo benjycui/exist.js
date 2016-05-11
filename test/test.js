@@ -25,6 +25,18 @@ describe('exist', function() {
     assert.strictEqual(exist(company.employees, '[1].name'), false);
     assert.strictEqual(exist(company, 'stockholders[0].name'), false);
   });
+
+  it('should support Array as the second argument', function() {
+    const company = {
+      employees: [
+        {
+          name: 'Benjy'
+        }
+      ]
+    };
+    assert.strictEqual(exist(company, ['employees', '0', 'name']), true);
+    assert.strictEqual(exist(company, ['stockholders', '0', 'name']), false);
+  });
 });
 
 describe('exist#get', function() {
@@ -61,6 +73,19 @@ describe('exist#get', function() {
     assert.strictEqual(exist.get(company.employees, '[1].name', 'Baby'), 'Baby');
     assert.strictEqual(exist.get(company, 'stockholders[0].name', 'Baby'), 'Baby');
   });
+
+  it('should support Array as the second argument', function() {
+    const company = {
+      employees: [
+        {
+          name: 'Benjy'
+        }
+      ]
+    };
+    assert.strictEqual(exist.get(company, ['employees', '0', 'name']), 'Benjy');
+    assert.strictEqual(exist.get(company, ['stockholders', '0', 'name']), undefined);
+    assert.strictEqual(exist.get(company, ['stockholders', '0', 'name'], 'Baby'), 'Baby');
+  })
 });
 
 describe('exist#set', function() {
@@ -79,6 +104,14 @@ describe('exist#set', function() {
     };
 
     assert.strictEqual(exist.set(company, 'employees[0].name', 'Benjy'), true);
+    assert.strictEqual(company.employees[0].name, 'Benjy');
+  });
+  it('should support Array as the second argument', function() {
+    const company = {
+      employees: [{}]
+    };
+    assert.strictEqual(exist.set(company.stockholders, ['0', 'name'], 'Benjy'), false);
+    assert.strictEqual(exist.set(company, ['employees', '0', 'name'], 'Benjy'), true);
     assert.strictEqual(company.employees[0].name, 'Benjy');
   });
 });
@@ -123,5 +156,22 @@ describe('exist#invoke', function() {
     assert.strictEqual(exist.invoke(company.employees[0], 'getName').toString(), NOOP.toString());
     assert.strictEqual(exist.invoke(company.employees, '[1].getName').toString(), NOOP.toString());
     assert.strictEqual(exist.invoke(company, 'stockholders[0].getName').toString(), NOOP.toString());
+  });
+
+  it('should support Array as the second argument', function() {
+    const company = {
+      employees: [
+        {
+          name: 'Benjy',
+          getName: function() {
+            return this.name;
+          }
+        }
+      ]
+    };
+    const NOOP = function() {};
+    assert.strictEqual(exist.invoke(company, ['employees', '0', 'getName'])(), 'Benjy');
+    assert.strictEqual(exist.invoke(company, ['stockholders', '0', 'getName']).toString(), NOOP.toString());
+    assert.strictEqual(exist.invoke(company, ['employees', '0', 'name']).toString(), NOOP.toString());
   });
 });

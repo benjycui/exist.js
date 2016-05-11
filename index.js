@@ -31,7 +31,7 @@ exist.get = function get(obj, nestedProp, defaultValue) {
 };
 
 exist.set = function set(obj, nestedProp, value) {
-  const props = nestedProp.split(rxAccess);
+  const props = Array.isArray(nestedProp) ? nestedProp : nestedProp.split(rxAccess);
   const ownee = props.pop();
 
   const owner = baseGet(obj, props);
@@ -45,7 +45,7 @@ exist.set = function set(obj, nestedProp, value) {
 
 const NOOP = function() {};
 exist.invoke = function invoke(obj, nestedMethod) {
-  const props = nestedMethod.split(rxAccess);
+  const props = Array.isArray(nestedMethod) ? nestedMethod : nestedMethod.split(rxAccess);
   const ownee = props.pop();
 
   const owner = baseGet(obj, props);

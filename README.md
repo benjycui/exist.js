@@ -56,7 +56,7 @@ exist({}, 'name') // => false
 
 ### exist(obj, nestedProp)
 
-> (Object, String) -> boolean
+> (Object, String|Array) -> boolean
 
 To check whether a nested property exists in `Object` or not.
 
@@ -70,13 +70,13 @@ const company = {
 };
 
 exist(company, 'employees[0].name') // => true
-exist(company, 'employees[0].age') // => false
+exist(company, ['employees', '0', 'age']) // => false
 ```
 
 
 ### exist.get(obj, nestedProp[, defaultValue])
 
-> (Object, String[, anything]) -> undefined | value
+> (Object, String|Array[, anything]) -> undefined | value
 
 To get a nested property. If this property does not exist, return `undefined` or `defaultValue`.
 
@@ -91,13 +91,13 @@ const company = {
 
 exist.get(company, 'employees[0].name') // => 'Benjy'
 exist.get(company, 'employees[0].age') // => undefined
-exist.get(company, 'employees[0].age', 18) // => 18
+exist.get(company, ['employees', '0', 'age'], 18) // => 18
 ```
 
 
 ### exist.set(obj, nestedProp, value)
 
-> (Object, String, anything) -> boolean
+> (Object, String|Array, anything) -> boolean
 
 To set a value to nested property. If success, return `true`. Otherwise, `false`.
 
@@ -107,13 +107,13 @@ const company = {
 };
 
 exist.set(company, 'employees[0].name', 'Benjy') // => true
-exist.set(company, 'stockholders[0].name', 'Benjy') // => false, for `stockholders` does not exist
+exist.set(company, ['stockholders', '0', 'name'], 'Benjy') // => false, for `stockholders` does not exist
 ```
 
 
 ### exist.invoke(obj, nestedMethod)
 
-> (Object, String) -> Function
+> (Object, String|Array) -> Function
 
 To get a nested method, or return NOOP(`function() {}`) if this property does not exist.
 
@@ -130,7 +130,7 @@ const company = {
 };
 
 exist.invoke(company, 'employees[0].sayHi')('Bob') // => 'Nice to meet you, Bob!'
-exist.invoke(company, 'employees[0].sayHello')('Bob') // => Nothing will happen
+exist.invoke(company, ['employees', '0', 'sayHello'])('Bob') // => Nothing will happen
 ```
 
 ## License
