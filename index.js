@@ -1,7 +1,7 @@
 'use strict';
 
 const isExist = function isExist(variable) {
-  return (variable !== undefined && variable !== null);
+  return variable !== undefined && variable !== null;
 };
 
 const rxAccess = /[\[\]\.]+/;

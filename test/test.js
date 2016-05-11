@@ -1,3 +1,5 @@
+'use strict';
+
 const assert = require('assert');
 const exist = require('..');
 
@@ -6,9 +8,9 @@ describe('exist', function() {
     const company = {
       employees: [
         {
-          name: 'Benjy'
-        }
-      ]
+          name: 'Benjy',
+        },
+      ],
     };
 
     assert.strictEqual(exist(company.employees[0], 'name'), true);
@@ -18,7 +20,7 @@ describe('exist', function() {
 
   it('should return `false` when property does not exist', function() {
     const company = {
-      employees: [{}]
+      employees: [{}],
     };
 
     assert.strictEqual(exist(company.employees[0], 'name'), false);
@@ -30,9 +32,9 @@ describe('exist', function() {
     const company = {
       employees: [
         {
-          name: 'Benjy'
-        }
-      ]
+          name: 'Benjy',
+        },
+      ],
     };
     assert.strictEqual(exist(company, ['employees', '0', 'name']), true);
     assert.strictEqual(exist(company, ['stockholders', '0', 'name']), false);
@@ -44,9 +46,9 @@ describe('exist#get', function() {
     const company = {
       employees: [
         {
-          name: 'Benjy'
-        }
-      ]
+          name: 'Benjy',
+        },
+      ],
     };
 
     assert.strictEqual(exist.get(company.employees[0], 'name'), 'Benjy');
@@ -56,7 +58,7 @@ describe('exist#get', function() {
 
   it('should return `undefined` when property does not exist', function() {
     const company = {
-      employees: [{}]
+      employees: [{}],
     };
 
     assert.strictEqual(exist.get(company.employees[0], 'name'), undefined);
@@ -66,7 +68,7 @@ describe('exist#get', function() {
 
   it('should return default value when property does not exist and default value is provided', function() {
     const company = {
-      employees: [{}]
+      employees: [{}],
     };
 
     assert.strictEqual(exist.get(company.employees[0], 'name', 'Baby'), 'Baby');
@@ -78,20 +80,20 @@ describe('exist#get', function() {
     const company = {
       employees: [
         {
-          name: 'Benjy'
-        }
-      ]
+          name: 'Benjy',
+        },
+      ],
     };
     assert.strictEqual(exist.get(company, ['employees', '0', 'name']), 'Benjy');
     assert.strictEqual(exist.get(company, ['stockholders', '0', 'name']), undefined);
     assert.strictEqual(exist.get(company, ['stockholders', '0', 'name'], 'Baby'), 'Baby');
-  })
+  });
 });
 
 describe('exist#set', function() {
   it('should return `false` when property can not be set', function() {
     const company = {
-      employees: [{}]
+      employees: [{}],
     };
 
     assert.strictEqual(exist.set(company.employees[1], 'name', 'Benjy'), false);
@@ -100,7 +102,7 @@ describe('exist#set', function() {
 
   it('should set value and return `true` when property was set', function() {
     const company = {
-      employees: [{}]
+      employees: [{}],
     };
 
     assert.strictEqual(exist.set(company, 'employees[0].name', 'Benjy'), true);
@@ -108,7 +110,7 @@ describe('exist#set', function() {
   });
   it('should support Array as the second argument', function() {
     const company = {
-      employees: [{}]
+      employees: [{}],
     };
     assert.strictEqual(exist.set(company.stockholders, ['0', 'name'], 'Benjy'), false);
     assert.strictEqual(exist.set(company, ['employees', '0', 'name'], 'Benjy'), true);
@@ -124,9 +126,9 @@ describe('exist#invoke', function() {
           name: 'Benjy',
           getName: function() {
             return this.name;
-          }
-        }
-      ]
+          },
+        },
+      ],
     };
 
     assert.strictEqual(exist.invoke(company.employees[0], 'getName')(), 'Benjy');
@@ -136,7 +138,7 @@ describe('exist#invoke', function() {
 
   it('should return `NOOP` when method does not exist', function() {
     const company = {
-      employees: [{}]
+      employees: [{}],
     };
     const NOOP = function() {};
 
@@ -148,8 +150,8 @@ describe('exist#invoke', function() {
   it('should return `NOOP` when property is not a function', function() {
     const company = {
       employees: [{
-        getName: 'Benjy'
-      }]
+        getName: 'Benjy',
+      }],
     };
     const NOOP = function() {};
 
@@ -165,9 +167,9 @@ describe('exist#invoke', function() {
           name: 'Benjy',
           getName: function() {
             return this.name;
-          }
-        }
-      ]
+          },
+        },
+      ],
     };
     const NOOP = function() {};
     assert.strictEqual(exist.invoke(company, ['employees', '0', 'getName'])(), 'Benjy');

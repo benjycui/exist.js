@@ -4,6 +4,8 @@
   "description": "To make it easier to access nested property",
   "main": "index.js",
   "scripts": {
+    "lint": "eslint .eslintrc.js index.js ./test",
+    "eslint-fix": "eslint --fix .eslintrc.js index.js ./test",
     "test": "mocha"
   },
   "repository": {
@@ -18,6 +20,8 @@
   "homepage": "https://github.com/benjycui/exist.js#readme",
   "devDependencies": {
     "benchmark": "^1.0.0",
+    "eslint": "^2.9.0",
+    "eslint-config-egg": "^2.0.0",
     "lazy.js": "^0.4.0",
     "lodash": "*",
     "race.js": "^0.1.4",
