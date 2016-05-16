@@ -1,6 +1,9 @@
 # exist.js
 
-[![Build Status](https://travis-ci.org/benjycui/exist.js.svg?branch=master)](https://travis-ci.org/benjycui/exist.js)
+[![](https://img.shields.io/travis/benjycui/exist.js.svg?style=flat-square)](https://travis-ci.org/benjycui/exist.js)
+[![npm package](https://img.shields.io/npm/v/exist.js.svg?style=flat-square)](https://www.npmjs.org/package/exist.js)
+[![NPM downloads](http://img.shields.io/npm/dm/exist.js.svg?style=flat-square)](https://npmjs.org/package/exist.js)
+[![Dependency Status](https://david-dm.org/benjycui/exist.js.svg?style=flat-square)](https://david-dm.org/benjycui/exist.js)
 
 If you are tired of those:
 
