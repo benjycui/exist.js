@@ -9,7 +9,7 @@
   "scripts": {
     "lint": "eslint .eslintrc.js index.js ./test",
     "eslint-fix": "eslint --fix .eslintrc.js index.js ./test",
-    "babel": "babel src --out-dir lib",
+    "babel": "babel ./index.js --out-dir lib",
     "pub": "npm run babel && npm publish && rm -rf lib",
     "test": "mocha"
   },
