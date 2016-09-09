@@ -57,11 +57,11 @@ exist({}, 'name') // => false
 
 ## API
 
-### exist(obj, nestedProp)
+### exist.detect(obj, nestedProp)
 
-> (Object, String|Array) -> boolean
+> (Object, String|Array) -> true | Array
 
-To check whether a nested property exists in `Object` or not.
+To check whether a nested property exists in `Object` or not. If the nested property is exist, return `true`. Otherwise, return the path to the property where the value starts missing.
 
 ```js
 const company = {
@@ -73,7 +73,7 @@ const company = {
 };
 
 exist(company, 'employees[0].name') // => true
-exist(company, ['employees', '0', 'age']) // => false
+exist(company, ['bosses', '0', 'age']) // => ['bosses']
 ```
 
 
@@ -98,11 +98,13 @@ exist.get(company, ['employees', '0', 'age'], 18) // => 18
 ```
 
 
-### exist.set(obj, nestedProp, value)
+### exist.set(obj, nestedProp, value[, createMissing])
 
-> (Object, String|Array, anything) -> boolean
+> (Object, String|Array, anything[, boolean]) -> boolean
 
 To set a value to nested property. If success, return `true`. Otherwise, `false`.
+
+If `createMissing` is `true`, `exist.set` will create plain objects and replace missing parts with them, so the value will be set correctly and return `true`.
 
 ```js
 const company = {
@@ -111,6 +113,9 @@ const company = {
 
 exist.set(company, 'employees[0].name', 'Benjy') // => true
 exist.set(company, ['stockholders', '0', 'name'], 'Benjy') // => false, for `stockholders` does not exist
+
+// After this call, company is `{ ..., stockholders: { 0: { name: 'Benjy' } } }`
+exist.set(company, ['stockholders', '0', 'name'], 'Benjy', true)
 ```
 
 
