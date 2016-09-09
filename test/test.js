@@ -41,6 +41,32 @@ describe('exist', function() {
   });
 });
 
+describe('exist#detect', function() {
+  it('should return `true` when property exists', function() {
+    const company = {
+      employees: [
+        {
+          name: 'Benjy',
+        },
+      ],
+    };
+
+    assert.strictEqual(exist.detect(company.employees[0], 'name'), true);
+    assert.strictEqual(exist.detect(company.employees, '[0].name'), true);
+    assert.strictEqual(exist.detect(company, 'employees[0].name'), true);
+  });
+
+  it('should return `path` to the property which value is missing', function() {
+    const company = {
+      employees: [{}],
+    };
+
+    assert.deepEqual(exist.detect(company.employees[0], 'name'), ['name']);
+    assert.deepEqual(exist.detect(company.employees, '[0].name'), ['0', 'name']);
+    assert.deepEqual(exist.detect(company, 'stockholders[0].name'), ['stockholders']);
+  });
+});
+
 describe('exist#get', function() {
   it('should return property when it exists', function() {
     const company = {
