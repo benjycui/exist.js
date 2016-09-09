@@ -142,6 +142,24 @@ describe('exist#set', function() {
     assert.strictEqual(exist.set(company, ['employees', '0', 'name'], 'Benjy'), true);
     assert.strictEqual(company.employees[0].name, 'Benjy');
   });
+
+  it('should create missing snippets while `createMissing=true`', function() {
+    const company = {
+      employees: [],
+    };
+    exist.set(company.employees, ['0', 'name'], 'Benjy', true);
+    assert.strictEqual(company.employees[0].name, 'Benjy');
+
+    const anotherCompany = {};
+    exist.set(anotherCompany, ['stockholders', '0', 'name'], 'Benjy', true);
+    assert.deepEqual(anotherCompany, {
+      stockholders: {
+        0: {
+          name: 'Benjy',
+        },
+      },
+    });
+  });
 });
 
 describe('exist#invoke', function() {
