@@ -21,7 +21,8 @@ const baseGet = function baseGet(obj, nestedProp, createMissing) {
   let prev = null;
   let curr = obj;
   const path = [];
-  for (let prop of props) {
+  for (let i in props) {
+    const prop = props[i];
     if (prop.length === 0) continue;
 
     prev = curr;
